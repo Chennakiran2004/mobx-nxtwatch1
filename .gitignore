@@ -18,6 +18,7 @@
 .env.test.local
 .env.production.local
 
-npm-debug.log*
+npm-debug.log*git
+kiran@kiran-vivobook:~/Documents/Projects/mobx-project$ 
 yarn-debug.log*
 yarn-error.log*
