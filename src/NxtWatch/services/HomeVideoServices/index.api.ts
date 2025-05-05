@@ -16,6 +16,7 @@ class HomeVideosApi implements HomeVideosService {
     if (!response.ok) throw new Error("Failed to fetch videos");
 
     const data = await response.json();
+    console.log(data);
 
     return data.videos.map((eachItem: any) => ({
       id: eachItem.id,

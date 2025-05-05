@@ -23,12 +23,10 @@ class HomeStore {
       const result: HomeVideoDetails[] = yield apiInstance.fetchHomeVideosAPI(
         searchInput
       );
+      console.log("Fetched Home API data:", result);
 
       this.videosList = result.map(
-        (video: HomeVideoDetails) =>
-          new HomeVideoModel(
-          video
-          )
+        (video: HomeVideoDetails) => new HomeVideoModel(video)
       );
 
       this.status = "succeeded";

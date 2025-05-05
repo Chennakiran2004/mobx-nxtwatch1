@@ -1,5 +1,4 @@
 import { makeAutoObservable, flow } from "mobx";
-import { IAuthService } from "../services/Authentication/index";
 import AuthService from "../services/Authentication/index.api";
 
 class AuthStore {
@@ -33,11 +32,11 @@ class AuthStore {
     this.isLoading = true;
     this.errorMsg = "";
     try {
-      const authService: IAuthService = new AuthService();
-      const token = yield authService.loginUser(this.username, this.password);
-      if (token) {
-        navigate("/");
-      }
+      const token = yield new AuthService().loginUser(
+        this.username,
+        this.password
+      );
+      if (token) navigate("/");
     } catch (error: any) {
       this.errorMsg = error.message || "An unexpected error occurred";
     } finally {

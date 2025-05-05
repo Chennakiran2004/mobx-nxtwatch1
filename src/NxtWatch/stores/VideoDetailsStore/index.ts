@@ -36,6 +36,8 @@ class VideoDetailsStore {
         videoId
       );
 
+      console.log(video, "Video Details");
+
       this.videoDetails = new VideoDetailsModel(video);
       this.status = "succeeded";
     } catch (error: any) {

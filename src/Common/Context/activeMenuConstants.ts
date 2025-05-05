@@ -1,4 +1,4 @@
-export const activeMenuConstants = {
+const activeMenuConstants = {
   initial: "initial",
   home: "home",
   trending: "trending",
@@ -6,4 +6,5 @@ export const activeMenuConstants = {
   savedVideos: "savedVideos",
 } as const;
 
+export default activeMenuConstants;
 export type ActiveMenu = keyof typeof activeMenuConstants;
