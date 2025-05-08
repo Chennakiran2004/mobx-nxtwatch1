@@ -2,8 +2,8 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate, Navigate } from "react-router-dom";
 import { getCookie } from "../../../Common/constants/utils/storageUtilities";
-import { authStore } from "../../stores/authStore";
 import { WEBSITE_LOGOS } from "../../../Common/constants/Images/WebsiteLogos";
+import useAuthStore from "../../hooks/useAuthStore";
 
 import {
   LoginContainer,
@@ -20,22 +20,24 @@ import {
 const Login: React.FC = observer(() => {
   const navigate = useNavigate();
   const logoURL = WEBSITE_LOGOS.light;
+  const { authStore } = useAuthStore();
+  const { setUsername, setPassword, toggleShowPassword, login } = authStore;
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    authStore.setUsername(event.target.value);
+    setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    authStore.setPassword(event.target.value);
+    setPassword(event.target.value);
   };
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    authStore.toggleShowPassword();
+    toggleShowPassword();
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    authStore.login(navigate);
+    login(navigate);
   };
 
   const jwtToken = getCookie();

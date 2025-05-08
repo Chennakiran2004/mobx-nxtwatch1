@@ -18,18 +18,14 @@ const LoaderWrapper: React.FC<LoaderWrapperProps> = ({
   retries = 3,
   retryDelay = 1000,
   children,
-  loadingComponent = (
-    <div>
-      <Loader />
-    </div>
-  ),
+  loadingComponent = <Loader />,
   errorComponent = DefaultErrorComponent,
 }) => {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [error, setError] = useState<Error | null>(null);
-  const [retriesLeft, setRetriesLeft] = useState(retries);
+  const [retryCount, setRetryCount] = useState(0);
 
   const fetchData = useCallback(async () => {
     setStatus("loading");
@@ -38,32 +34,34 @@ const LoaderWrapper: React.FC<LoaderWrapperProps> = ({
       setStatus("success");
       setError(null);
     } catch (err) {
-      if (retriesLeft > 0) {
+      if (retryCount < retries) {
         setTimeout(() => {
-          setRetriesLeft((prev) => prev - 1);
-          fetchData();
+          setRetryCount((prev) => prev + 1);
         }, retryDelay);
       } else {
         setStatus("error");
         setError(err as Error);
       }
     }
-  }, [onFetch, retriesLeft, retryDelay]);
+  }, [onFetch, retryCount, retries, retryDelay]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   const handleRetry = () => {
-    setRetriesLeft(retries);
+    setRetryCount(0);
     fetchData();
   };
 
   if (status === "loading") {
     return loadingComponent;
   }
-  if (status === "error" && error)
+
+  if (status === "error" && error) {
     return errorComponent({ error, retry: handleRetry });
+  }
+
   return <>{children}</>;
 };
 

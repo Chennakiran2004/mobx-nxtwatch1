@@ -3,23 +3,16 @@ import { Link } from "react-router-dom";
 import { useTheme } from "../../../../Common/Context/ThemeContext";
 import { useActiveMenu } from "../../../../Common/Context/ActiveMenuContext";
 import { GamingVideoDetails } from "../../../types/GamingVideos";
-
-import {
-  VideoCardContainer,
-  Thumbnail,
-  ThumbnailText,
-  VideoTitle,
-  VideoTextContainer,
-  VideoDetailsContainer,
-  VideoDetailsText,
-} from "../styles";
+import { VideoCardContainer } from "../styles";
+import ThumbnailSection from "../ThumbnailSection";
+import VideoInfoSection from "../VideoInfoSection";
 
 interface VideoCardProps {
   gameDetails: GamingVideoDetails;
 }
 
-const VideoCard: React.FC<VideoCardProps> = ({ gameDetails }) => {
-  const { thumbnailUrl, viewCount, title, id } = gameDetails;
+const GamingVideoCard: React.FC<VideoCardProps> = ({ gameDetails }) => {
+  const { id } = gameDetails;
   const { isDarkTheme } = useTheme();
   const { changeActiveMenu } = useActiveMenu();
   const theme = isDarkTheme ? "dark" : "light";
@@ -32,20 +25,15 @@ const VideoCard: React.FC<VideoCardProps> = ({ gameDetails }) => {
         role="link"
         onClick={() => changeActiveMenu("initial")}
       >
-        <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
-        <ThumbnailText>
-          <VideoTextContainer>
-            <VideoTitle theme={theme}>{title}</VideoTitle>
-            <VideoDetailsContainer>
-              <VideoDetailsText>
-                {viewCount} Watching Worldwide
-              </VideoDetailsText>
-            </VideoDetailsContainer>
-          </VideoTextContainer>
-        </ThumbnailText>
+        <ThumbnailSection thumbnailUrl={gameDetails.thumbnailUrl} />
+        <VideoInfoSection
+          title={gameDetails.title}
+          viewCount={gameDetails.viewCount}
+          theme={theme}
+        />
       </Link>
     </VideoCardContainer>
   );
 };
 
-export default VideoCard;
+export default GamingVideoCard;

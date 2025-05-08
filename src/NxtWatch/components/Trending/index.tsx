@@ -1,38 +1,35 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import Layout from "../../../Common/components/Layout";
 import Loader from "../../../Common/components/Loader";
 import NoResults from "../../../Common/components/NoResults";
 import TrendingMenu from "./TrendingMenu";
 import VideoList from "./VideoList";
-import trendingStore from "../../stores/TrendingStore";
-import { TrendingMainContainer, MainBody, TrendingContainer } from "./styles";
-import { useTheme } from "../../../Common/Context/ThemeContext";
 import LoaderWrapper from "../../../Common/components/LoaderWrapper";
+import { TrendingMainContainer, MainBody, TrendingContainer } from "./styles";
+import useTrendingStore from "../../hooks/useTrendingStore";
 
 const Trending: React.FC = observer(() => {
-  const { isDarkTheme } = useTheme();
-  const { videosList } = trendingStore;
-  const [retryTrigger, setRetryTrigger] = useState(0);
+  const { trendingStore } = useTrendingStore();
 
-  const theme = isDarkTheme ? "dark" : "light";
+  const { videosList, fetchVideos } = trendingStore;
 
-  const handleRetry = () => {
-    setRetryTrigger((prev) => prev + 1);
-  };
+  useEffect(() => {
+    fetchVideos();
+  }, [fetchVideos]);
 
-  const fetchVideos = useCallback(async () => {
-    await trendingStore.fetchVideos();
-  }, []);
+  function handleRetry(): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <Layout>
-      <TrendingMainContainer data-testid="trending" theme={theme}>
+      <TrendingMainContainer data-testid="trending">
         <MainBody>
           <TrendingContainer data-testid="trending-container">
             <TrendingMenu />
             <LoaderWrapper
-              key={retryTrigger}
+              // key={retryTrigger}
               onFetch={fetchVideos}
               retries={3}
               retryDelay={2000}

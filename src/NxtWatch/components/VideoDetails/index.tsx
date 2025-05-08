@@ -1,86 +1,39 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
-import { formatDistanceToNow } from "date-fns";
+import { flowResult } from "mobx";
 import Layout from "../../../Common/components/Layout";
-import VideoPlayer from "./VideoPlayer";
-import VideoActions from "./VideoAction";
-import ChannelInfo from "./ChannelInfo";
 import Loader from "../../../Common/components/Loader";
 import NoResults from "../../../Common/components/NoResults";
-import videoDetailsStore from "../../stores/VideoDetailsStore";
-import { useTheme } from "../../../Common/Context/ThemeContext";
 import LoaderWrapper from "../../../Common/components/LoaderWrapper";
-
-import {
-  MainBody,
-  VideoItemDetailsContainer,
-  VideoDetailContainer,
-  VideoTextContainer,
-  VideoTitle,
-  ViewsAndPostedContainer,
-  LikesAndViewsContainer,
-  ViewsText,
-  VideoDescriptionText,
-} from "./styles";
+import { useTheme } from "../../../Common/Context/ThemeContext";
+import { MainBody, VideoItemDetailsContainer } from "./styles";
+import useVideoDetailsStore from "../../hooks/useVideoItemDeteailsStore";
+import VideoInfoSection from "./VideoInfoSection";
 
 const VideoItemDetails = observer(() => {
   const { id = "" } = useParams<{ id: string }>();
   const { isDarkTheme } = useTheme();
-  const { videoDetails, like, dislike } = videoDetailsStore;
-  const [retryTrigger, setRetryTrigger] = useState(0);
+  const { videoDetailsStore } = useVideoDetailsStore();
 
-  const postedAt = formatDistanceToNow(
-    new Date(videoDetails?.publishedAt || new Date())
-  );
-  const formattedPostedAt = postedAt.split(" ").slice(1).join(" ");
-
-  const fetchVideoDetails = useCallback(async () => {
-    await videoDetailsStore.fetchVideoDetails(id);
-  }, [id]);
+  const fetchVideoDetails = () =>
+    flowResult(videoDetailsStore.fetchVideoDetails(id));
 
   return (
     <Layout>
       <MainBody>
         <VideoItemDetailsContainer theme={isDarkTheme}>
           <LoaderWrapper
-            key={`${id}-${retryTrigger}`}
             onFetch={fetchVideoDetails}
             retries={3}
             retryDelay={2000}
             loadingComponent={<Loader />}
             errorComponent={({ retry }) => <NoResults onRetry={retry} />}
           >
-            {videoDetails && (
-              <VideoDetailContainer>
-                <VideoPlayer url={videoDetails.videoUrl} />
-                <VideoTextContainer>
-                  <VideoTitle theme={isDarkTheme}>
-                    {videoDetails.title}
-                  </VideoTitle>
-                  <LikesAndViewsContainer>
-                    <ViewsAndPostedContainer>
-                      <ViewsText>{videoDetails.viewCount} views</ViewsText>
-                      <ViewsText>{formattedPostedAt} ago</ViewsText>
-                    </ViewsAndPostedContainer>
-                    <VideoActions
-                      videoDetails={videoDetails}
-                      like={like}
-                      dislike={dislike}
-                      onLike={() => videoDetailsStore.toggleLike()}
-                      onDislike={() => videoDetailsStore.toggleDislike()}
-                    />
-                  </LikesAndViewsContainer>
-                  <hr />
-                  <ChannelInfo
-                    channel={videoDetails.channel}
-                    theme={isDarkTheme ? "dark" : "light"}
-                  />
-                  <VideoDescriptionText theme={isDarkTheme}>
-                    {videoDetails.description}
-                  </VideoDescriptionText>
-                </VideoTextContainer>
-              </VideoDetailContainer>
+            {videoDetailsStore.videoDetails ? (
+              <VideoInfoSection videoDetails={videoDetailsStore.videoDetails} />
+            ) : (
+              <NoResults onRetry={fetchVideoDetails} />
             )}
           </LoaderWrapper>
         </VideoItemDetailsContainer>

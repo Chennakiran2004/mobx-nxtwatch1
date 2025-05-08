@@ -1,4 +1,4 @@
-import { makeAutoObservable, flow } from "mobx";
+import { makeAutoObservable } from "mobx";
 import TrendingVideosApi from "../../services/TrendingVideosServices/index.api";
 import { TrendingVideoDetails } from "../../types/TrendingVideos";
 import { TrendingVideoModel } from "../Models/TrendingVideoModel";
@@ -9,19 +9,17 @@ class TrendingStore {
   error: string | null = null;
 
   constructor() {
-    makeAutoObservable(this, {
-      fetchVideos: flow,
-    });
+    makeAutoObservable(this);
   }
 
-  *fetchVideos() {
+  fetchVideos = async (): Promise<void> => {
     this.apiStatus = "inProgress";
     this.error = null;
 
     try {
       const apiInstance = new TrendingVideosApi();
       const result: TrendingVideoDetails[] =
-        yield apiInstance.fetchTrendingVideosAPI();
+        await apiInstance.fetchTrendingVideosAPI();
 
       this.videosList = result.map(
         (video: TrendingVideoDetails) => new TrendingVideoModel(video)
@@ -31,8 +29,7 @@ class TrendingStore {
       this.apiStatus = "failure";
       this.error = err.message || "Failed to fetch data";
     }
-  }
+  };
 }
 
-const trendingStore = new TrendingStore();
-export default trendingStore;
+export default TrendingStore;

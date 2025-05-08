@@ -47,5 +47,4 @@ class VideoDetailsStore {
   }
 }
 
-const videoDetailsStore = new VideoDetailsStore();
-export default videoDetailsStore;
+export default VideoDetailsStore;

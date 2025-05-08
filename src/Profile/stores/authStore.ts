@@ -45,4 +45,4 @@ class AuthStore {
   }
 }
 
-export const authStore = new AuthStore();
+export default AuthStore;

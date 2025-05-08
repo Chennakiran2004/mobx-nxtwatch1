@@ -4,7 +4,6 @@ import getAuthHeaders from "../../../Common/constants/utils/getAuthHeaders";
 import { getCookie } from "../../../Common/constants/utils/storageUtilities";
 import { API_ENDPOINTS } from "../APIEndpoints";
 
-
 class GamingVideosApi implements GamingVideosService {
   async fetchGamingVideosAPI(): Promise<GamingVideoDetails[]> {
     const jwtToken = getCookie();
