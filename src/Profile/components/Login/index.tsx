@@ -21,7 +21,7 @@ const Login: React.FC = observer(() => {
   const navigate = useNavigate();
   const logoURL = WEBSITE_LOGOS.light;
   const { authStore } = useAuthStore();
-  const { setUsername, setPassword, toggleShowPassword, login } = authStore;
+  const { setUsername, setPassword, toggleShowPassword } = authStore;
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -37,7 +37,7 @@ const Login: React.FC = observer(() => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    login(navigate);
+    authStore.login(navigate);
   };
 
   const jwtToken = getCookie();

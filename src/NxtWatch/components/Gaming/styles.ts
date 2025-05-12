@@ -80,16 +80,7 @@ export const RetryButton = styled.button`
   margin-top: 18px;
 `;
 
-export const VideoCardContainer = styled.li`
-  width: 30%;
-  margin: 8px;
-  @media screen and (max-width: 768px) {
-    width: 45%;
-  }
-  @media screen and (max-width: 576px) {
-    width: 100%;
-  }
-`;
+
 
 export const Thumbnail = styled.img`
   width: 100%;
