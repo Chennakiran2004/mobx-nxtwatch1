@@ -33,6 +33,7 @@ export class VideoDetailsModel {
       viewCount,
       channel,
     } = data;
+
     this.id = id;
     this.description = description;
     this.publishedAt = publishedAt;
@@ -40,6 +41,10 @@ export class VideoDetailsModel {
     this.title = title;
     this.videoUrl = videoUrl;
     this.viewCount = viewCount;
-    this.channel = channel;
+    this.channel = new Channel(
+      channel.name,
+      channel.profileImageUrl,
+      channel.subscriberCount
+    );
   }
 }

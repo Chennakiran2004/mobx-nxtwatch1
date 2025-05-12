@@ -1,4 +1,4 @@
-import { ViewsAndPostedContainer, ViewsText } from "../VideoDetails/styles";
+import { ViewsAndPostedContainer, ViewsText } from "./styledComponents";
 
 const VideoMetaData = ({
   viewCount,

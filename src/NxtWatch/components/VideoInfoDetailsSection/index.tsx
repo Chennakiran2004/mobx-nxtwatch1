@@ -1,8 +1,8 @@
 import React from "react";
 import { formatDistanceToNow } from "date-fns";
 import VideoPlayer from "../../../Common/components/VideoPlayer";
-import VideoActions from "../VideoDetails/VideoAction";
-import ChannelInfo from "../VideoDetails/ChannelInfo";
+import VideoActions from "../VideoAction";
+import ChannelInfo from "../../../Common/components/ChannelInfo";
 import {
   VideoDetailContainer,
   VideoTextContainer,
