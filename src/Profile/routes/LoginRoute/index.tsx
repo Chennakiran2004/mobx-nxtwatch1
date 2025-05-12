@@ -1,9 +1,9 @@
 import { Route } from "react-router-dom";
-import Login from "../../components/Login";
+import LoginPage from "../LoginPage";
 
 export const LoginRoutes = (
   <>
-    <Route path="/login" element={<Login />} />
+    <Route path="/login" element={<LoginPage />} />
   </>
 );
 export default LoginRoutes;

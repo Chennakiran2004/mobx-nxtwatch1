@@ -2,9 +2,9 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import Layout from "../../../Common/components/Layout";
 import { HomeMainContainer } from "./styles";
-import HomeContent from "./HomeContent";
+import HomeContent from "../HomeContent";
 
-const Home: React.FC = observer(() => (
+const HomeVideos: React.FC = observer(() => (
   <Layout>
     <HomeMainContainer data-testid="Home container">
       <HomeContent />
@@ -12,4 +12,4 @@ const Home: React.FC = observer(() => (
   </Layout>
 ));
 
-export default Home;
+export default HomeVideos;

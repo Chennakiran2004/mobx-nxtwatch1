@@ -1,28 +1,35 @@
 import React from "react";
 import Layout from "../../../Common/components/Layout";
 import NoResults from "../../../Common/components/NoResults";
-import SavedMenu from "./SavedMenu";
-import VideoList from "./VideoList";
+import VideoList from "../VideosList";
 import { SavedVideosMainContainer, SavedVideosContainer } from "./styles";
 import useSavedVideosData from "../../hooks/useSavedVideosData";
+import { RiMenuAddLine } from "react-icons/ri";
+import PageMenu from "../../../Common/components/PageMenu";
 
 const SavedVideos: React.FC = () => {
-  const { theme, savedVideosList } = useSavedVideosData();
+  const { savedVideosList } = useSavedVideosData();
+
+  const formattedVideos = savedVideosList.map((video) => ({
+    id: video.id,
+    thumbnailUrl: video.thumbnailUrl,
+    title: video.title,
+    viewCount: video.viewCount.toString(),
+    cardType: "saved" as const,
+    profileImageUrl: video.channel.profileImageUrl,
+    channelName: video.channel.name,
+    publishedAt: video.publishedAt,
+  }));
 
   return (
     <Layout>
       <SavedVideosMainContainer>
-        <SavedMenu />
+        <PageMenu title="saved videos" icon={RiMenuAddLine} />
         <SavedVideosContainer>
-          {savedVideosList.length === 0 ? (
+          {formattedVideos.length === 0 ? (
             <NoResults onRetry={() => {}} />
           ) : (
-            <VideoList
-              videos={savedVideosList.map((video) => ({
-                ...video,
-                viewCount: video.viewCount.toString(),
-              }))}
-            />
+            <VideoList videos={formattedVideos} />
           )}
         </SavedVideosContainer>
       </SavedVideosMainContainer>

@@ -1,19 +1,20 @@
 import { Route } from "react-router-dom";
-import Home from "../../components/HomeVideos";
-import Trending from "../../components/Trending";
-import Gaming from "../../components/Gaming";
-import VideoDetails from "../../components/VideoDetails";
-import SavedVideos from "../../components/SavedVideos";
+
 import ProtectedRoute from "../../../Common/hocs/ProtectedRoute";
+import HomePage from "../HomePage";
+import TrendingPage from "../TrendingPage";
+import GamingPage from "../GamingPage";
+import VideoDetailsPage from "../VideoDetilsPage";
+import SavedVideosPage from "../SavedVideospage";
 
 export const NxtWatchRoutes = (
   <>
     <Route element={<ProtectedRoute />}>
-      <Route path="/" element={<Home />} />
-      <Route path="/trending" element={<Trending />} />
-      <Route path="/gaming" element={<Gaming />} />
-      <Route path="/videos/:id" element={<VideoDetails />} />
-      <Route path="/saved-videos" element={<SavedVideos />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/trending" element={<TrendingPage />} />
+      <Route path="/gaming" element={<GamingPage />} />
+      <Route path="/videos/:id" element={<VideoDetailsPage />} />
+      <Route path="/saved-videos" element={<SavedVideosPage />} />
     </Route>
   </>
 );
