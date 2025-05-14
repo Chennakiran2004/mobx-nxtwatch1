@@ -1,3 +1,4 @@
+import { BaseChannelModel } from "../../../../Channel/stores/models/BaseChannleModel";
 import { TrendingVideoDetails } from "../../../types/TrendingVideos";
 
 export class TrendingVideoModel {
@@ -6,10 +7,7 @@ export class TrendingVideoModel {
   thumbnailUrl: string;
   viewCount: number;
   publishedAt: string;
-  channel: {
-    name: string;
-    profileImageUrl: string;
-  };
+  channel: BaseChannelModel;
 
   constructor(data: TrendingVideoDetails) {
     const { id, title, thumbnailUrl, viewCount, publishedAt, channel } = data;
@@ -18,6 +16,6 @@ export class TrendingVideoModel {
     this.thumbnailUrl = thumbnailUrl;
     this.viewCount = viewCount;
     this.publishedAt = publishedAt;
-    this.channel = channel;
+    this.channel = new BaseChannelModel(channel);
   }
 }

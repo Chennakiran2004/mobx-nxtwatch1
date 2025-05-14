@@ -2,10 +2,11 @@ import { makeAutoObservable } from "mobx";
 import TrendingVideosApi from "../../services/TrendingVideosServices/index.api";
 import { TrendingVideoDetails } from "../../types/TrendingVideos";
 import { TrendingVideoModel } from "../Models/TrendingVideoModel";
+import { APIStatus } from "../../constants/APIStatus";
 
 class TrendingStore {
   videosList: TrendingVideoModel[] = [];
-  apiStatus: "initial" | "inProgress" | "success" | "failure" = "initial";
+  apiStatus: APIStatus = APIStatus.initial;
   error: string | null = null;
 
   constructor() {
@@ -13,7 +14,7 @@ class TrendingStore {
   }
 
   fetchVideos = async (): Promise<void> => {
-    this.apiStatus = "inProgress";
+    this.apiStatus = APIStatus.inProgress;
     this.error = null;
 
     try {
@@ -24,9 +25,9 @@ class TrendingStore {
       this.videosList = result.map(
         (video: TrendingVideoDetails) => new TrendingVideoModel(video)
       );
-      this.apiStatus = "success";
+      this.apiStatus = APIStatus.success;
     } catch (err: any) {
-      this.apiStatus = "failure";
+      this.apiStatus = APIStatus.failure;
       this.error = err.message || "Failed to fetch data";
     }
   };

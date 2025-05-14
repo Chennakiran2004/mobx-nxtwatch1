@@ -2,10 +2,11 @@ import { makeAutoObservable, flow } from "mobx";
 import VideoDetailsApi from "../../services/VideoDetailsServices/index.api";
 import { VideoDetails } from "../../types/VideoDetails";
 import { VideoDetailsModel } from "../Models/VideoDetailsModel";
+import { APIStatus } from "../../constants/APIStatus";
 
 class VideoDetailsStore {
   videoDetails: VideoDetailsModel | null = null;
-  status: "idle" | "loading" | "succeeded" | "failed" = "idle";
+  apiStatus: APIStatus = APIStatus.initial;
   error: string | null = null;
   like = false;
   dislike = false;
@@ -27,7 +28,7 @@ class VideoDetailsStore {
   }
 
   *fetchVideoDetails(videoId: string) {
-    this.status = "loading";
+    this.apiStatus = APIStatus.inProgress;
     this.error = null;
 
     try {
@@ -39,9 +40,9 @@ class VideoDetailsStore {
       console.log(video, "Video Details");
 
       this.videoDetails = new VideoDetailsModel(video);
-      this.status = "succeeded";
+      this.apiStatus = APIStatus.success;
     } catch (error: any) {
-      this.status = "failed";
+      this.apiStatus = APIStatus.failure;
       this.error = error.message || "Failed to fetch video details";
     }
   }

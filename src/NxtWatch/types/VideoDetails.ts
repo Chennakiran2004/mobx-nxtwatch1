@@ -1,3 +1,5 @@
+import { ChannelData } from "../../Channel/types/CheannelDetails";
+
 export type VideoDetails = {
   id: string;
   description: string;
@@ -6,9 +8,5 @@ export type VideoDetails = {
   title: string;
   videoUrl: string;
   viewCount: number;
-  channel: {
-    name: string;
-    profileImageUrl: string;
-    subscriberCount: string;
-  };
+  channel: ChannelData;
 };

@@ -1,4 +1,5 @@
 import { HomeVideoDetails } from "../../../types/HomeVidos";
+import { BaseChannelModel } from "../../../../Channel/stores/models/BaseChannleModel";
 
 export class HomeVideoModel {
   id: string;
@@ -6,10 +7,7 @@ export class HomeVideoModel {
   thumbnailUrl: string;
   viewCount: number;
   publishedAt: string;
-  channel: {
-    name: string;
-    profileImageUrl: string;
-  };
+  channel: BaseChannelModel;
 
   constructor(data: HomeVideoDetails) {
     const { id, title, thumbnailUrl, viewCount, publishedAt, channel } = data;
@@ -18,6 +16,6 @@ export class HomeVideoModel {
     this.thumbnailUrl = thumbnailUrl;
     this.viewCount = viewCount;
     this.publishedAt = publishedAt;
-    this.channel = channel;
+    this.channel = new BaseChannelModel(channel);
   }
 }

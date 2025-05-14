@@ -1,13 +1,3 @@
-// import SavedVideos from "../../components/SavedVideos";
-
-// const SavedVideosPage = () => {
-//   return <SavedVideos />;
-// };
-
-// export default SavedVideosPage;
-
-// src/Kossip/routes/SavedVideosPage/index.tsx
-
 import React from "react";
 import { observer } from "mobx-react-lite";
 import SavedVideos from "../../components/SavedVideos";

@@ -2,10 +2,11 @@ import { makeAutoObservable } from "mobx";
 import GamingVideosApi from "../../services/GamingVidoesServices/index.api";
 import { GamingVideoDetails } from "../../types/GamingVideos";
 import { GamingVideoModel } from "../Models/GamingVideoModel";
+import { APIStatus } from "../../constants/APIStatus";
 
 class GamingStore {
   videosList: GamingVideoModel[] = [];
-  apiStatus: "initial" | "inProgress" | "success" | "failure" = "initial";
+  apiStatus: APIStatus = APIStatus.initial;
   error: string | null = null;
 
   constructor() {
@@ -13,7 +14,7 @@ class GamingStore {
   }
 
   fetchVideos = async (): Promise<void> => {
-    this.apiStatus = "inProgress";
+    this.apiStatus = APIStatus.inProgress;
     this.error = null;
 
     try {
@@ -24,9 +25,9 @@ class GamingStore {
       this.videosList = result.map(
         (video: GamingVideoDetails) => new GamingVideoModel(video)
       );
-      this.apiStatus = "success";
+      this.apiStatus = APIStatus.success;
     } catch (err: any) {
-      this.apiStatus = "failure";
+      this.apiStatus = APIStatus.failure;
       this.error = err.message || "Failed to fetch data";
     }
   };

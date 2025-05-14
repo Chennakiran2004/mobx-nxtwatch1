@@ -2,10 +2,11 @@ import { makeAutoObservable } from "mobx";
 import { HomeVideoDetails } from "../../types/HomeVidos";
 import HomeVideosApi from "../../services/HomeVideoServices/index.api";
 import { HomeVideoModel } from "../Models/HomeVideoModel";
+import { APIStatus } from "../../constants/APIStatus";
 
 class HomeStore {
   videosList: HomeVideoModel[] = [];
-  apiStatus: "initial" | "inProgress" | "success" | "failure" = "initial";
+  apiStatus: APIStatus = APIStatus.initial;
   error: string | null = null;
 
   constructor() {
@@ -13,7 +14,7 @@ class HomeStore {
   }
 
   fetchVideos = async (searchInput: string): Promise<void> => {
-    this.apiStatus = "inProgress";
+    this.apiStatus = APIStatus.inProgress;
     this.error = null;
 
     try {
@@ -26,9 +27,9 @@ class HomeStore {
       this.videosList = result.map(
         (video: HomeVideoDetails) => new HomeVideoModel(video)
       );
-      this.apiStatus = "success";
+      this.apiStatus = APIStatus.success;
     } catch (error: any) {
-      this.apiStatus = "failure";
+      this.apiStatus = APIStatus.failure;
       this.error = error.message || "Something went wrong";
     }
   };

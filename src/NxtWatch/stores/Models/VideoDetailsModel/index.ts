@@ -1,16 +1,5 @@
 import { VideoDetails } from "../../../types/VideoDetails";
-
-export class Channel {
-  name: string;
-  profileImageUrl: string;
-  subscriberCount: string;
-
-  constructor(name: string, profileImageUrl: string, subscriberCount: string) {
-    this.name = name;
-    this.profileImageUrl = profileImageUrl;
-    this.subscriberCount = subscriberCount;
-  }
-}
+import { ChannelModel } from "../../../../Channel/stores/models/ChannelModel";
 
 export class VideoDetailsModel {
   id: string;
@@ -20,7 +9,7 @@ export class VideoDetailsModel {
   title: string;
   videoUrl: string;
   viewCount: number;
-  channel: Channel;
+  channel: ChannelModel;
 
   constructor(data: VideoDetails) {
     const {
@@ -41,10 +30,6 @@ export class VideoDetailsModel {
     this.title = title;
     this.videoUrl = videoUrl;
     this.viewCount = viewCount;
-    this.channel = new Channel(
-      channel.name,
-      channel.profileImageUrl,
-      channel.subscriberCount
-    );
+    this.channel = new ChannelModel(channel);
   }
 }
