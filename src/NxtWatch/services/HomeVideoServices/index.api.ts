@@ -9,14 +9,19 @@ class HomeVideosApi implements HomeVideosService {
     const jwtToken = getCookie();
     if (!jwtToken) throw new Error("User is not authenticated");
 
-    const response = await fetch(API_ENDPOINTS.HomeVideos, {
+    const url = new URL(API_ENDPOINTS.HomeVideos);
+    if (searchInput) {
+      url.searchParams.append("search", searchInput);
+    }
+
+    const response = await fetch(url, {
       headers: getAuthHeaders(jwtToken),
     });
 
     if (!response.ok) throw new Error("Failed to fetch videos");
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     return data.videos.map((eachItem: any) => ({
       id: eachItem.id,

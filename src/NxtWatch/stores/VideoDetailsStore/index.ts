@@ -37,7 +37,7 @@ class VideoDetailsStore {
         videoId
       );
 
-      console.log(video, "Video Details");
+      // console.log(video, "Video Details");
 
       this.videoDetails = new VideoDetailsModel(video);
       this.apiStatus = APIStatus.success;

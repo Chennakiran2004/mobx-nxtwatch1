@@ -1,59 +1,54 @@
-// import React from "react";
-// import { observer } from "mobx-react-lite";
-// import Layout from "../../../Common/components/Layout";
-// import { HomeMainContainer } from "./styles";
-// import HomeContent from "../HomeContent";
-
-// const HomeVideos: React.FC = observer(() => (
-//   <HomeMainContainer data-testid="Home container">
-//     <HomeContent />
-//   </HomeMainContainer>
-// ));
-
-// export default HomeVideos;
-
-// src/Kossip/components/HomeVideos/index.tsx
-
 import React from "react";
-import VideoList from "../VideosList";
 import Banner from "../../../Common/components/Banner";
 import SearchBar from "../../../Common/components/SearchBar";
+import Loader from "../../../Common/components/Loader";
 import NoResults from "../../../Common/components/NoResults";
-import { HomeContainer } from "./styles";
+import VideoList from "../VideosList";
+import LoaderWrapper from "../../../Common/components/LoaderWrapper";
+import { HomeContainer } from "../HomeVideos/styles";
 import { BaseVideo } from "../../../Common/types/BaseVideo";
 
-type HomeVideosProps = {
-  videos: BaseVideo[];
-  searchInput: string;
-  onSearchChange: (value: string) => void;
-  onSearch: () => void;
+type Props = {
   isPopup: boolean;
-  onCloseBanner: () => void;
+  searchInput: string;
+  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearch: () => void;
+  closeBanner: () => void;
+  onFetchVideos: () => Promise<void>;
+  videosList: BaseVideo[];
 };
 
-const HomeVideos: React.FC<HomeVideosProps> = ({
-  videos,
+const HomeVideos: React.FC<Props> = ({
+  isPopup,
   searchInput,
   onSearchChange,
   onSearch,
-  isPopup,
-  onCloseBanner,
-}) => {
-  if (!videos.length) {
-    return <NoResults onRetry={onSearch} />;
-  }
-
-  return (
-    <HomeContainer>
-      {isPopup && <Banner onClose={onCloseBanner} />}
-      <SearchBar
-        value={searchInput}
-        onChange={(e) => onSearchChange(e.target.value)}
-        onSearch={onSearch}
-      />
-      <VideoList videos={videos} />
-    </HomeContainer>
-  );
-};
+  closeBanner,
+  onFetchVideos,
+  videosList,
+}) => (
+  <HomeContainer>
+    {isPopup && <Banner onClose={closeBanner} />}
+    <SearchBar
+      value={searchInput}
+      onChange={onSearchChange}
+      onSearch={onSearch}
+    />
+    <LoaderWrapper
+      key={searchInput}
+      onFetch={onFetchVideos}
+      retries={3}
+      retryDelay={2000}
+      loadingComponent={<Loader />}
+      errorComponent={({ retry }) => <NoResults onRetry={retry} />}
+    >
+      {!videosList.length ? (
+        <NoResults onRetry={onSearch} />
+      ) : (
+        <VideoList videos={videosList} />
+      )}
+    </LoaderWrapper>
+  </HomeContainer>
+);
 
 export default HomeVideos;
