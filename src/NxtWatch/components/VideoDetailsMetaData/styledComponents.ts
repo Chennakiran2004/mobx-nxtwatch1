@@ -7,7 +7,7 @@ export const ViewsAndPostedContainer = styled.div`
 `;
 
 export const ViewsText = styled.span`
-  color: #64748b;
+  color: ${({ theme }) => theme.textColor};
   font-size: 15px;
   font-family: "Roboto", sans-serif;
   margin-right: 8px;

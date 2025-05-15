@@ -11,10 +11,8 @@ import {
 } from "./styledComponents";
 import VideoMetaData from "../VideoDetailsMetaData";
 import VideoDescription from "../VideoDescription";
-import { useTheme } from "../../../Common/Context/ThemeContext";
 
 const VideoInfoSection = ({ videoDetails }: { videoDetails: any }) => {
-  const { isDarkTheme } = useTheme();
   const postedAt = formatDistanceToNow(new Date(videoDetails.publishedAt));
   const formattedPostedAt = postedAt.split(" ").slice(1).join(" ");
 
@@ -22,7 +20,7 @@ const VideoInfoSection = ({ videoDetails }: { videoDetails: any }) => {
     <VideoDetailContainer>
       <VideoPlayer url={videoDetails.videoUrl} />
       <VideoTextContainer>
-        <VideoTitle theme={isDarkTheme}>{videoDetails.title}</VideoTitle>
+        <VideoTitle>{videoDetails.title}</VideoTitle>
         <LikesAndViewsContainer>
           <VideoMetaData
             viewCount={videoDetails.viewCount}
@@ -37,14 +35,8 @@ const VideoInfoSection = ({ videoDetails }: { videoDetails: any }) => {
           />
         </LikesAndViewsContainer>
         <hr />
-        <ChannelInfo
-          channel={videoDetails.channel}
-          theme={isDarkTheme ? "dark" : "light"}
-        />
-        <VideoDescription
-          description={videoDetails.description}
-          isDarkTheme={isDarkTheme}
-        />
+        <ChannelInfo channel={videoDetails.channel} />
+        <VideoDescription description={videoDetails.description} />
       </VideoTextContainer>
     </VideoDetailContainer>
   );

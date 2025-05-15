@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-export const GamingMainContainer = styled.div<{ theme: string }>`
-  background-color: ${(props) =>
-    props.theme === "dark" ? "#0f0f0f" : "#f9f9f9"};
+export const GamingMainContainer = styled.div`
+  background-color: ${({ theme }) => theme.backgroundColor};
   min-height: 90vh;
   overflow-y: auto;
 `;
@@ -16,7 +15,7 @@ export const GamingContainer = styled.div`
   width: 100%;
 `;
 
-export const LoaderContainer = styled.div<{ theme: string }>`
+export const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,8 +41,8 @@ export const FailureImg = styled.img`
   width: 300px;
 `;
 
-export const FailureText = styled.h1<{ theme: string }>`
-  color: ${(props) => (props.theme === "dark" ? "#f9f9f9" : "#1e293b")};
+export const FailureText = styled.h1`
+  color: ${({ theme }) => theme.textColor};
   font-family: Roboto;
 `;
 
@@ -67,8 +66,8 @@ export const ThumbnailText = styled.div`
   padding: 8px;
 `;
 
-export const VideoTitle = styled.p<{ theme: string }>`
-  color: ${(props) => (props.theme === "dark" ? "#f9f9f9" : "#1e293b")};
+export const VideoTitle = styled.p`
+  color: ${({ theme }) => theme.textColor};
   font-family: Roboto;
   font-size: 15px;
   font-weight: 500;

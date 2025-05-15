@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
-export const HomeMainContainer = styled.div<{ theme: string }>`
-  background-color: ${(props) =>
-    props.theme === "dark" ? "#181818" : "#f9f9f9"};
+export const HomeMainContainer = styled.div`
+  background-color: ${({ theme }) => theme.backgroundColor};
   min-height: 90vh;
   overflow-y: auto;
 `;
 
-export const HomeContainer = styled.div<{ theme: string }>`
+export const HomeContainer = styled.div`
   padding: 20px;
-  background-color: ${(props) =>
-    props.theme === "dark" ? "#0f0f0f" : "#f9f9f9"};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const VideoCardContainer = styled.div`

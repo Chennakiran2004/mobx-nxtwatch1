@@ -12,7 +12,7 @@ export const VideoTextContainer = styled.div`
 `;
 
 export const VideoTitle = styled.h1<{ theme: string }>`
-  color: ${({ theme }) => (theme === "dark" ? "#f9f9f9" : "#181818")};
+  color: ${({ theme }) => theme.textColor};
   font-size: 22px;
   font-weight: 500;
   margin: 0 0 8px 0;

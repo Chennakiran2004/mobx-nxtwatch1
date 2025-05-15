@@ -20,7 +20,6 @@ interface VideoInfoSectionProps {
 const VideoInfoSection: React.FC<VideoInfoSectionProps> = ({
   title,
   viewCount,
-  theme,
   channelName,
   publishedAt,
   cardType,
@@ -37,7 +36,7 @@ const VideoInfoSection: React.FC<VideoInfoSectionProps> = ({
 
   return (
     <VideoTextContainer>
-      <VideoTitle theme={theme}>{title}</VideoTitle>
+      <VideoTitle>{title}</VideoTitle>
       <VideoDetailsContainer>
         {channelName && <VideoDetailsText>{channelName}</VideoDetailsText>}
         {cardType === "gaming" ? (

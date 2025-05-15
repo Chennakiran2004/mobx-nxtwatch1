@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const SavedVideosMainContainer = styled.div`
-  background-color: ${({ theme }) =>
-    theme === "dark" ? "#0f0f0f" : "#f9f9f9"};
+  background-color: ${({ theme }) => theme.backgroundColor};
   min-height: 90vh;
   width: 100%;
 `;
@@ -10,21 +9,19 @@ export const SavedVideosMainContainer = styled.div`
 export const SavedMenuContainer = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) =>
-    theme === "dark" ? "#181818" : "#f1f1f1"};
+  background-color: ${({ theme }) => theme.backgroundColor};
   padding: 20px 30px;
 `;
 
 export const IconContainer = styled.div`
-  background-color: ${({ theme }) =>
-    theme === "dark" ? "#0f0f0f" : "#e2e8f0"};
+  background-color: ${({ theme }) => theme.backgroundColor};
   border-radius: 50%;
   padding: 12px;
   margin-right: 18px;
 `;
 
 export const MenuHeading = styled.h1<{ theme: string }>`
-  color: ${({ theme }) => (theme === "dark" ? "#ffffff" : "#181818")};
+  color: ${({ theme }) => theme.textColor};
   font-size: 28px;
   font-family: Roboto;
 `;
@@ -53,6 +50,6 @@ export const NoVideosImg = styled.img`
 `;
 
 export const FailureText = styled.h1<{ theme: string }>`
-  color: ${({ theme }) => (theme === "dark" ? "#f9f9f9" : "#1e293b")};
+  color: ${({ theme }) => theme.textColor};
   font-family: Roboto;
 `;

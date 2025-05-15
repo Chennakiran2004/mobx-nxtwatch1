@@ -35,7 +35,7 @@ const HomeVideos: React.FC<Props> = ({
       onSearch={onSearch}
     />
     <LoaderWrapper
-      key={searchInput}
+      // key={searchInput}
       onFetch={onFetchVideos}
       retries={3}
       retryDelay={2000}

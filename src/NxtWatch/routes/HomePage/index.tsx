@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { flowResult } from "mobx";
 
 import useHomeStore from "../../hooks/useHomeStore";
-import HomeContentUI from "../../components/HomeVideos";
+import HomeVideos from "../../components/HomeVideos";
 import { BaseVideo } from "../../../Common/types/BaseVideo";
 
 const HomePage: React.FC = observer(() => {
@@ -43,7 +43,7 @@ const HomePage: React.FC = observer(() => {
   }));
 
   return (
-    <HomeContentUI
+    <HomeVideos
       isPopup={isPopup}
       searchInput={searchInput}
       onSearchChange={onSearchChange}

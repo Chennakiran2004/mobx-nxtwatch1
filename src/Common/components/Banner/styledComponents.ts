@@ -21,6 +21,7 @@ export const BannerLogo = styled.img`
 
 export const BannerText = styled.p`
   font-family: Roboto;
+  color: black;
 `;
 
 export const GetItButton = styled.button`

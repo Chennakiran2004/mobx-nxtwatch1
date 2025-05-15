@@ -17,8 +17,7 @@ export const SidebarContainer = styled.div`
 
 export const VideoItemDetailsContainer = styled.div<{ theme: string }>`
   flex: 1;
-  background-color: ${({ theme }) =>
-    theme === "dark" ? "#0f0f0f" : "#f9f9f9"};
+  background-color: ${({ theme }) => theme.backgroundColor};
   min-height: 90vh;
   padding: 32px 16px;
   display: flex;
@@ -31,10 +30,6 @@ export const LoaderContainer = styled.div`
   align-items: center;
   min-height: 60vh;
 `;
-
-// Video player
-
-// Video details
 
 export const ViewsAndPostedContainer = styled.div`
   display: flex;
@@ -63,7 +58,7 @@ export const FailureImg = styled.img`
 `;
 
 export const FailureText = styled.h1<{ theme: string }>`
-  color: ${({ theme }) => (theme === "dark" ? "#f9f9f9" : "#181818")};
+  color: ${({ theme }) => theme.textColor};
   font-size: 22px;
   margin-bottom: 8px;
   font-family: "Roboto", sans-serif;

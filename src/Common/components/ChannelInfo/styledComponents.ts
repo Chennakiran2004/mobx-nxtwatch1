@@ -14,7 +14,7 @@ export const ChannelLogo = styled.img`
 `;
 
 export const ChannelDetailsText = styled.p<{ theme: string }>`
-  color: ${({ theme }) => (theme === "dark" ? "#f9f9f9" : "#181818")};
+  color: ${({ theme }) => theme.textColor};
   font-size: 16px;
   font-weight: 500;
   margin: 0;

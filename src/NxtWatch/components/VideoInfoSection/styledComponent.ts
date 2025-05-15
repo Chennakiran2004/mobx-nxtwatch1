@@ -15,17 +15,25 @@ export const VideoDetailsContainer2 = styled.div`
 `;
 
 export const VideoDetailsText = styled.p`
-  color: #64748b;
+  color: ${({ theme }) => theme.textColor};
   font-family: Roboto;
   font-size: 13px;
   margin-top: 0;
   margin-right: 10px;
 `;
 
-export const VideoTitle = styled.p<{ theme: string }>`
-  color: ${(props) => (props.theme === "dark" ? "#f9f9f9" : "#1e293b")};
+export const VideoTitle = styled.p`
+  color: ${({ theme }) => theme.textColor};
   font-family: Roboto;
   font-size: 15px;
   font-weight: 500;
   margin-top: 0;
+`;
+
+export const LikesAndViewsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  flex-wrap: wrap;
 `;
