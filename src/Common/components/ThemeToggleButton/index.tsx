@@ -1,7 +1,7 @@
 import React from "react";
 import { FiSun } from "react-icons/fi";
 import { FaMoon } from "react-icons/fa";
-import Button from "../../Button";
+import Button from "../Button";
 import { ThemeToggleButtonProps } from "./ThemeToggleButton.types";
 
 const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({

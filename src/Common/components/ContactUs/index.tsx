@@ -1,19 +1,14 @@
 import React from "react";
 import { ContactUsContainer, Text } from "./styledComponents";
 import SocialIcons from "../SocialIcons";
-interface ContactUsProps {
-  theme: string;
-}
 
-const ContactUs: React.FC<ContactUsProps> = ({ theme }) => (
+const ContactUs = () => (
   <ContactUsContainer>
-    <Text theme={theme}>CONTACT US</Text>
+    <Text>CONTACT US</Text>
     <div>
       <SocialIcons />
     </div>
-    <Text theme={theme}>
-      Enjoy! Now to see your channels and recommendations!
-    </Text>
+    <Text>Enjoy! Now to see your channels and recommendations!</Text>
   </ContactUsContainer>
 );
 

@@ -6,28 +6,39 @@ import {
   RetryButton,
 } from "./styledComponents";
 import { useTheme } from "../../../Common/Context/ThemeContext";
+import { NoResultsImage } from "../../constants/Images/ErrorImages";
 
 interface NoResultsProps {
-  onRetry: () => void;
+  onRetry?: () => void;
+  imageUrl?: string;
+  title?: string;
+  description?: string;
+  showRetryButton?: boolean;
 }
 
-const NoResults: React.FC<NoResultsProps> = ({ onRetry }) => {
+const NoResults: React.FC<NoResultsProps> = ({
+  onRetry,
+  imageUrl,
+  title,
+  description,
+  showRetryButton,
+}) => {
   const { isDarkTheme } = useTheme();
   const theme = isDarkTheme ? "dark" : "light";
   return (
     <NoVideosContainer data-testid="no-vieos-view-container">
       <NoVideosImg
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+        src={imageUrl || NoResultsImage}
         alt="no videos"
         data-testid="no videos found"
       />
-      <FailureText theme={theme}>No search results found</FailureText>
       <FailureText theme={theme}>
-        Try different key words or remove search filter
+        {title || "No search results found"}
       </FailureText>
-      <RetryButton type="button" onClick={onRetry}>
-        Retry
-      </RetryButton>
+      <FailureText theme={theme}>
+        {description || "Try different key words or remove search filter"}
+      </FailureText>
+      {showRetryButton && <RetryButton onClick={onRetry}>Retry</RetryButton>}
     </NoVideosContainer>
   );
 };

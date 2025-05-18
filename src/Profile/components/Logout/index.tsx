@@ -4,13 +4,12 @@ import { Button, LogoutPopupContent } from "./styledComponents";
 
 type LogoutPopupProps = {
   onClickLogout: () => void;
-  theme: string;
 };
 
-const LogoutPopup: React.FC<LogoutPopupProps> = ({ onClickLogout, theme }) => {
+const LogoutPopup: React.FC<LogoutPopupProps> = ({ onClickLogout }) => {
   const popupBody: any = (close: () => void) => {
     return (
-      <LogoutPopupContent theme={theme}>
+      <LogoutPopupContent>
         <p>Are you sure, you want to logout?</p>
         <div>
           <Button

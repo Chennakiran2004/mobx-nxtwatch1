@@ -26,13 +26,7 @@ const VideoInfoSection = ({ videoDetails }: { videoDetails: any }) => {
             viewCount={videoDetails.viewCount}
             formattedPostedAt={formattedPostedAt}
           />
-          <VideoActions
-            videoDetails={videoDetails}
-            like={videoDetails.like}
-            dislike={videoDetails.dislike}
-            onLike={() => videoDetails.toggleLike()}
-            onDislike={() => videoDetails.toggleDislike()}
-          />
+          <VideoActions videoDetails={videoDetails} />
         </LikesAndViewsContainer>
         <hr />
         <ChannelInfo channel={videoDetails.channel} />

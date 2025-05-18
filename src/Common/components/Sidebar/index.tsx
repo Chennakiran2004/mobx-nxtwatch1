@@ -1,17 +1,13 @@
 import React from "react";
 import MenuItemsList from "../MenuItemsList";
-import { useTheme } from "../../Context/ThemeContext";
 import { SidebarContainer } from "./styledComponents";
-import ContactUs from "./ContactUs";
+import ContactUs from "../ContactUs";
 
 const Sidebar: React.FC = () => {
-  const { isDarkTheme } = useTheme();
-  const theme = isDarkTheme ? "dark" : "light";
-
   return (
-    <SidebarContainer data-testid="sidebar" theme={theme}>
+    <SidebarContainer data-testid="sidebar">
       <MenuItemsList />
-      <ContactUs theme={theme} />
+      <ContactUs />
     </SidebarContainer>
   );
 };

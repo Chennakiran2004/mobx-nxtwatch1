@@ -7,6 +7,7 @@ import VideoList from "../VideosList";
 import LoaderWrapper from "../../../Common/components/LoaderWrapper";
 import { HomeContainer } from "../HomeVideos/styles";
 import { BaseVideo } from "../../../Common/types/BaseVideo";
+import { APIStatus } from "../../constants/APIStatus";
 
 type Props = {
   isPopup: boolean;
@@ -16,8 +17,11 @@ type Props = {
   closeBanner: () => void;
   onFetchVideos: () => Promise<void>;
   videosList: BaseVideo[];
+  status: APIStatus;
+  error: string | null;
 };
 
+//TODO: why ths status is not coming from store?
 const HomeVideos: React.FC<Props> = ({
   isPopup,
   searchInput,
@@ -26,6 +30,8 @@ const HomeVideos: React.FC<Props> = ({
   closeBanner,
   onFetchVideos,
   videosList,
+  status,
+  error,
 }) => (
   <HomeContainer>
     {isPopup && <Banner onClose={closeBanner} />}
@@ -35,10 +41,9 @@ const HomeVideos: React.FC<Props> = ({
       onSearch={onSearch}
     />
     <LoaderWrapper
-      // key={searchInput}
       onFetch={onFetchVideos}
-      retries={3}
-      retryDelay={2000}
+      status={status}
+      error={error}
       loadingComponent={<Loader />}
       errorComponent={({ retry }) => <NoResults onRetry={retry} />}
     >

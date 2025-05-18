@@ -5,8 +5,8 @@ import { useTheme } from "../../Context/ThemeContext";
 import { removeCookie } from "../../constants/utils/storageUtilities";
 import { WEBSITE_LOGOS } from "../../constants/Images/WebsiteLogos";
 
-import NavMobile from "./NavMobile";
-import NavLarge from "./NavLarge";
+import NavMobile from "../NavMobile";
+import NavLarge from "../NavLarge";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();

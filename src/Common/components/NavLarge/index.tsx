@@ -3,7 +3,7 @@ import { NavLargeContainer, NavLargeIcons } from "./styledComponents";
 import Logo from "../Logo";
 import ThemeToggleButton from "../ThemeToggleButton";
 import ProfileAvatar from "../ProfileAvatar";
-import LogoutPopup from "../../../../Profile/components/Logout";
+import LogoutPopup from "../../../Profile/components/Logout";
 import { NavLargeProps } from "./NavLarge.types";
 
 const NavLarge: React.FC<NavLargeProps> = ({
@@ -14,7 +14,7 @@ const NavLarge: React.FC<NavLargeProps> = ({
   theme,
   onLogoClick,
 }) => (
-  <NavLargeContainer data-testid="nav-desktop" theme={theme}>
+  <NavLargeContainer data-testid="nav-desktop">
     <Logo logoURL={logoURL} onClick={onLogoClick} />
     <NavLargeIcons>
       <ThemeToggleButton
@@ -24,7 +24,7 @@ const NavLarge: React.FC<NavLargeProps> = ({
         size={23}
       />
       <ProfileAvatar />
-      <LogoutPopup onClickLogout={onClickLogout} theme={theme} />
+      <LogoutPopup onClickLogout={onClickLogout} />
     </NavLargeIcons>
   </NavLargeContainer>
 );

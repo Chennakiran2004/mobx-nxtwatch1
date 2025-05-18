@@ -5,6 +5,7 @@ import NoResults from "../../../Common/components/NoResults";
 import { SavedVideosMainContainer, SavedVideosContainer } from "./styles";
 import { BaseVideo } from "../../../Common/types/BaseVideo";
 import { RiMenuAddLine } from "react-icons/ri";
+import { NoSavedVideosImage } from "../../../Common/constants/Images/ErrorImages";
 
 type SavedVideosProps = {
   videos: BaseVideo[];
@@ -16,7 +17,12 @@ const SavedVideos: React.FC<SavedVideosProps> = ({ videos }) => {
       <PageMenu title="saved videos" icon={RiMenuAddLine} />
       <SavedVideosContainer>
         {videos.length === 0 ? (
-          <NoResults onRetry={() => {}} />
+          <NoResults
+            imageUrl={NoSavedVideosImage}
+            title="No saved videos found"
+            description="You can save your videos while watching them"
+            showRetryButton={false}
+          />
         ) : (
           <VideoList videos={videos} />
         )}

@@ -1,14 +1,4 @@
-// import VideoItemDetails from "../../components/VideoItemDetails";
-
-// const VideoDetailsPage = () => {
-//   return <VideoItemDetails />;
-// };
-
-// export default VideoDetailsPage;
-
-// src/Kossip/routes/VideoDetailsPage/index.tsx
-
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { flowResult } from "mobx";
@@ -22,14 +12,11 @@ import { VideoDetailsModel } from "../../stores/Models/VideoDetailsModel";
 const VideoDetailsPage: React.FC = observer(() => {
   const { id = "" } = useParams<{ id: string }>();
   const { videoDetailsStore } = useVideoDetailsStore();
+  const { fetchVideoDetails, apiStatus, error } = videoDetailsStore;
 
-  const fetchVideoDetails = async () => {
-    await flowResult(videoDetailsStore.fetchVideoDetails(id));
+  const handleFetch = async () => {
+    await flowResult(fetchVideoDetails(id));
   };
-
-  useEffect(() => {
-    fetchVideoDetails();
-  }, [id]);
 
   const model: VideoDetailsModel | null = videoDetailsStore.videoDetails
     ? new VideoDetailsModel(videoDetailsStore.videoDetails)
@@ -37,13 +24,13 @@ const VideoDetailsPage: React.FC = observer(() => {
 
   return (
     <LoaderWrapper
-      onFetch={fetchVideoDetails}
-      retries={3}
-      retryDelay={2000}
+      onFetch={handleFetch}
+      status={apiStatus}
+      error={error}
       loadingComponent={<Loader />}
       errorComponent={({ retry }) => <NoResults onRetry={retry} />}
     >
-      <VideoItemDetails videoDetails={model} onRetry={fetchVideoDetails} />
+      <VideoItemDetails videoDetails={model} onRetry={handleFetch} />
     </LoaderWrapper>
   );
 });

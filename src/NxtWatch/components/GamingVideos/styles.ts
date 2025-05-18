@@ -9,6 +9,9 @@ export const GamingMainContainer = styled.div`
 export const MainBody = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  overflow: scroll;
+  height: 100vh;
 `;
 
 export const GamingContainer = styled.div`

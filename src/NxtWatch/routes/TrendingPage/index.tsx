@@ -8,17 +8,17 @@ import { observer } from "mobx-react-lite";
 
 const TrendingPage: React.FC = observer(() => {
   const { trendingStore } = useTrendingStore();
-  const { videosList, fetchVideos } = trendingStore;
+  const { videosList, fetchVideos, apiStatus, error } = trendingStore;
 
   useEffect(() => {
     fetchVideos();
-  }, [fetchVideos]);
+  }, []);
 
   return (
     <LoaderWrapper
       onFetch={fetchVideos}
-      retries={3}
-      retryDelay={2000}
+      status={apiStatus}
+      error={error}
       loadingComponent={<Loader />}
       errorComponent={({ retry }) => <NoResults onRetry={retry} />}
     >

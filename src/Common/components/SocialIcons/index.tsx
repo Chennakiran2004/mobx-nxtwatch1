@@ -4,7 +4,7 @@ import {
   FACEBOOK_ICON,
   LINKEDIN_ICON,
   TWITTER_ICON,
-} from "../../../constants/Images/Icons";
+} from "../../constants/Images/Icons";
 
 const SOCIAL_ICONS = [
   { src: TWITTER_ICON, alt: "twitter logo" },

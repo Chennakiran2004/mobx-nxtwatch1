@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
-type ThemeProps = {
-  theme: string;
-};
-
-export const LogoutPopupContent = styled.div<ThemeProps>`
-  background-color: ${({ theme }) => (theme === "dark" ? "#333" : "#fff")};
-  color: ${({ theme }) => (theme === "dark" ? "#fff" : "#333")};
+export const LogoutPopupContent = styled.div`
+  background-color: ${({ theme }) => theme.backgroundColor};
+  color: ${({ theme }) => theme.textColor};
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);

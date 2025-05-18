@@ -9,10 +9,11 @@ import AppRoutes from "./Common/routes/AppRoutes";
 import { darkTheme, lightTheme } from "./Common/constants/theme";
 import GlobalStyle from "./Common/constants/GlobalStyle";
 
-// Renders App after ThemeContext is ready
 const AppContent = () => {
   const { isDarkTheme } = useTheme();
   const selectedTheme = isDarkTheme ? darkTheme : lightTheme;
+  // whys is this here?
+  //TODO: make this as store
 
   return (
     <StyledThemeProvider theme={selectedTheme}>

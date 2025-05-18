@@ -8,7 +8,7 @@ import { BaseVideo } from "../../../Common/types/BaseVideo";
 
 const HomePage: React.FC = observer(() => {
   const { homeStore } = useHomeStore();
-  const { videosList, fetchVideos } = homeStore;
+  const { videosList, fetchVideos, apiStatus, error } = homeStore;
 
   const [isPopup, setIsPopup] = useState(true);
   const [searchInput, setSearchInput] = useState("");
@@ -51,6 +51,8 @@ const HomePage: React.FC = observer(() => {
       closeBanner={closeBanner}
       onFetchVideos={fetchData}
       videosList={transformedVideos}
+      status={apiStatus}
+      error={error}
     />
   );
 });

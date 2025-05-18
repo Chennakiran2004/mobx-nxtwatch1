@@ -1,11 +1,12 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import SavedVideos from "../../components/SavedVideos";
-import useSavedVideosData from "../../hooks/useSavedVideosData";
 import { BaseVideo } from "../../../Common/types/BaseVideo";
+import useSavedVideosStore from "../../hooks/useSavedVideosStore";
 
 const SavedVideosPage: React.FC = observer(() => {
-  const { savedVideosList } = useSavedVideosData();
+  const { savedVideosStore } = useSavedVideosStore();
+  const { savedVideosList } = savedVideosStore;
 
   const transformedVideos: BaseVideo[] = savedVideosList.map((video) => ({
     id: video.id,
@@ -13,8 +14,8 @@ const SavedVideosPage: React.FC = observer(() => {
     title: video.title,
     viewCount: video.viewCount.toString(),
     cardType: "saved",
-    profileImageUrl: video.channel.profileImageUrl,
-    channelName: video.channel.name,
+    profileImageUrl: video.channelProfileImageUrl,
+    channelName: video.channelName,
     publishedAt: video.publishedAt,
   }));
 

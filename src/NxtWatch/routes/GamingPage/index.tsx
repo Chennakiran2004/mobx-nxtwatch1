@@ -1,13 +1,3 @@
-// import GamingVideos from "../../components/GamingVideos";
-
-// const GamingPage = () => {
-//   return <GamingVideos />;
-// };
-
-// export default GamingPage;
-
-// src/Kossip/routes/GamingPage/index.tsx
-
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import LoaderWrapper from "../../../Common/components/LoaderWrapper";
@@ -20,11 +10,7 @@ import { BaseVideo } from "../../../Common/types/BaseVideo";
 
 const GamingPage: React.FC = observer(() => {
   const { gamingStore } = useGamingStore();
-  const { videosList, fetchVideos } = gamingStore;
-
-  useEffect(() => {
-    fetchVideos();
-  }, [fetchVideos]);
+  const { videosList, fetchVideos, apiStatus, error } = gamingStore;
 
   const transformedVideos: BaseVideo[] = videosList.map((video) => ({
     id: video.id,
@@ -37,8 +23,8 @@ const GamingPage: React.FC = observer(() => {
   return (
     <LoaderWrapper
       onFetch={() => flowResult(fetchVideos())}
-      retries={3}
-      retryDelay={2000}
+      status={apiStatus}
+      error={error}
       loadingComponent={<Loader />}
       errorComponent={({ retry }) => <NoResults onRetry={retry} />}
     >

@@ -1,5 +1,6 @@
 import GamingStore from "../../NxtWatch/stores/GamingStore";
 import HomeStore from "../../NxtWatch/stores/HomeStore";
+import SavedVideosStore from "../../NxtWatch/stores/SavedVideosStore";
 import TrendingStore from "../../NxtWatch/stores/TrendingStore";
 import VideoDetailsStore from "../../NxtWatch/stores/VideoDetailsStore";
 import AuthStore from "../../Profile/stores/authStore";
@@ -10,6 +11,7 @@ export class RootStore {
   gamingStore: GamingStore;
   trendingStore: TrendingStore;
   videoDetailsStore: VideoDetailsStore;
+  savedVideosStore: SavedVideosStore;
 
   constructor() {
     this.homeStore = new HomeStore();
@@ -17,6 +19,7 @@ export class RootStore {
     this.trendingStore = new TrendingStore();
     this.videoDetailsStore = new VideoDetailsStore();
     this.authStore = new AuthStore();
+    this.savedVideosStore = new SavedVideosStore();
   }
 }
 

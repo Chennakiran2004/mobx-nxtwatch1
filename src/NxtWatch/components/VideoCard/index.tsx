@@ -1,10 +1,8 @@
-// src/NxtWatch/components/VideoCard/index.tsx
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../../Common/Context/ThemeContext";
 import { useActiveMenu } from "../../../Common/Context/ActiveMenuContext";
-import { VideoCardContainer } from "./styledComponents";
+import { StyledVideoLink, VideoCardContainer } from "./styledComponents";
 import ThumbnailSection from "../ThumbnailSection";
 import VideoInfoSection from "../VideoInfoSection";
 
@@ -39,14 +37,13 @@ const VideoCard: React.FC<VideoCardProps> = ({
 
   return (
     <VideoCardContainer as={cardType === "home" ? "li" : "div"}>
-      <Link
+      <StyledVideoLink
         to={`/videos/${id}`}
         className="link"
         onClick={() => changeActiveMenu("initial")}
       >
         <ThumbnailSection
           thumbnailUrl={thumbnailUrl}
-          profileImageUrl={profileImageUrl}
           $width={thumbnailWidth}
           $height="auto"
         />
@@ -57,8 +54,9 @@ const VideoCard: React.FC<VideoCardProps> = ({
           publishedAt={publishedAt}
           theme={theme}
           cardType={cardType}
+          profileImageUrl={profileImageUrl}
         />
-      </Link>
+      </StyledVideoLink>
     </VideoCardContainer>
   );
 };

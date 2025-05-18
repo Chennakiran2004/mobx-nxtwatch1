@@ -4,6 +4,7 @@ export const SavedVideosMainContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
   min-height: 90vh;
   width: 100%;
+  overflow: scroll;
 `;
 
 export const SavedMenuContainer = styled.div`

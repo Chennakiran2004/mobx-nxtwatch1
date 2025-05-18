@@ -1,59 +1,61 @@
 import React from "react";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { RiMenuAddLine } from "react-icons/ri";
-import { Button } from "./styledComponents";
-import { useSavedVideos } from "../../../Common/Context/SavedVideosContext";
+import { observer } from "mobx-react-lite";
+import { Button } from "./styledComponents"; 
 import { VideoDetails } from "../../types/VideoDetails";
+import useSavedVideosStore from "../../hooks/useSavedVideosStore";
 
 interface VideoActionsProps {
   videoDetails: VideoDetails;
-  like: boolean;
-  dislike: boolean;
-  onLike: () => void;
-  onDislike: () => void;
 }
 
-const VideoActions: React.FC<VideoActionsProps> = ({
-  videoDetails,
-  like,
-  dislike,
-  onLike,
-  onDislike,
-}) => {
-  const { updateSave, savedVideosList } = useSavedVideos();
-  const isSaved = savedVideosList.some((video) => video.id === videoDetails.id);
+const VideoActions: React.FC<VideoActionsProps> = ({ videoDetails }) => {
+  const { savedVideosStore } = useSavedVideosStore();
+
+  const {
+    toggleSave,
+    toggleLike,
+    toggleDislike,
+    isSaved,
+    isLiked,
+    isDisliked,
+  } = savedVideosStore;
+
+  const videoId = videoDetails.id;
+
+  const like = isLiked(videoId);
+  const dislike = isDisliked(videoId);
+  const saved = isSaved(videoId);
 
   return (
     <div>
       <Button
         type="button"
         theme={like ? "active" : "not-active"}
-        onClick={onLike}
+        onClick={() => toggleLike(videoId)}
         data-testid="likeButton"
       >
-        <BiLike size={20} />
-        Like
+        <BiLike size={20} /> Like
       </Button>
       <Button
         type="button"
         theme={dislike ? "active" : "not-active"}
-        onClick={onDislike}
+        onClick={() => toggleDislike(videoId)}
         data-testid="dislikeButton"
       >
-        <BiDislike size={20} />
-        Dislike
+        <BiDislike size={20} /> Dislike
       </Button>
       <Button
         type="button"
-        theme={isSaved ? "active" : "not-active"}
-        onClick={() => updateSave(videoDetails)}
+        theme={saved ? "active" : "not-active"}
+        onClick={() => toggleSave(videoDetails)}
         data-testid="saveButton"
       >
-        <RiMenuAddLine size={20} />
-        {isSaved ? "Saved" : "Save"}
+        <RiMenuAddLine size={20} /> {saved ? "Saved" : "Save"}
       </Button>
     </div>
   );
 };
 
-export default VideoActions;
+export default observer(VideoActions);

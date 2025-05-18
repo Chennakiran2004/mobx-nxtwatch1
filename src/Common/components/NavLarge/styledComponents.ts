@@ -6,6 +6,9 @@ export const NavLargeContainer = styled(NavMobileContainer)`
   display: none;
   @media screen and (min-width: 768px) {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
   }
 `;
 
